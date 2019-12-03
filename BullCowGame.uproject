@@ -269,6 +269,10 @@
 		{
 			"Name": "OneSkyLocalizationService",
 			"Enabled": true
+		},
+		{
+			"Name": "FMODStudio",
+			"Enabled": true
 		}
 	]
 }

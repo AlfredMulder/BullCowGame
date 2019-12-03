@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 
-const TArray64<FString> GWords = 
+const TArray<FString> GWords = 
 {
 TEXT("a"),
 TEXT("ability"),
