@@ -7,7 +7,7 @@ auto UBullCowCartridge::BeginPlay() -> void// When the game starts
     Super::BeginPlay();
 
 	Isograms = GetValidWords(GWords);
-	
+
 	SetupGame();
 }
 
@@ -18,7 +18,7 @@ auto UBullCowCartridge::OnInput(const FString& PlayerInput) -> void // When the 
 		ClearScreen();
 		SetupGame();
 	}
-	else 
+	else
 	{
 		ProcessGuess(PlayerInput, Lives);
 	}
@@ -31,11 +31,11 @@ auto UBullCowCartridge::SetupGame() -> void
 	HiddenWord = Isograms[FMath::RandRange(0, Isograms.Num() - 1)];
 	Lives = HiddenWord.Len() * 2; // Set Lives
 	bGameOver = false;
-	
+
 	PrintLine(TEXT("Guess the %i letter word!"),HiddenWord.Len());
 	// PrintLine(TEXT("The HiddenWord is: %s\n"), *HiddenWord); // Debug Line
 	PrintLine(TEXT("You have %i Lives."), Lives);
-	PrintLine(TEXT("\nType in your guess and\n press enter to continue..."));
+	PrintLine(TEXT("\nPress tab-button and type in your guess\nthen press enter to continue..."));
 }
 
 auto UBullCowCartridge::EndGame() -> void
@@ -52,10 +52,10 @@ auto UBullCowCartridge::ProcessGuess(const FString& Guess, int32 Counter) -> voi
 		EndGame();
 		return;
 	}
-	
+
 	if (Guess.Len() != HiddenWord.Len())
 	{
-		
+
 		PrintLine(TEXT("The hidden word is %i letter long"), HiddenWord.Len());
 		PrintLine(TEXT("Sorry, try guessing again! \nYou have %i lives remaining"), Lives);
 		return;
@@ -67,7 +67,7 @@ auto UBullCowCartridge::ProcessGuess(const FString& Guess, int32 Counter) -> voi
 		PrintLine(TEXT("No repeating letters, guess again"));
 		return;
 	}
-		
+
 	PrintLine(TEXT("Lost a life!"));
 	--Lives;
 	if (Lives <= 0)
@@ -82,13 +82,12 @@ auto UBullCowCartridge::ProcessGuess(const FString& Guess, int32 Counter) -> voi
 	const auto Score = GetBullCows(Guess);
 
 	PrintLine(TEXT("You have %i bulls and %i Cows"), Score.Bulls, Score.Cows);
-	
 	PrintLine(TEXT("Guess again, you have %i lives left."), Lives);
 }
 
 auto UBullCowCartridge::IsIsogram(const FString& Word) -> bool
 {
-	for (auto Index = 0; Index < Word.Len(); ++Index)
+	for (auto Index : Word)
     {
         for (auto Comparison = Index + 1; Comparison < Word.Len(); ++Comparison)
         {
@@ -96,9 +95,9 @@ auto UBullCowCartridge::IsIsogram(const FString& Word) -> bool
             {
                 return false;
             }
-        }   
+        }
     }
-	
+
 	return true;
 }
 
@@ -142,4 +141,3 @@ auto UBullCowCartridge::GetBullCows(const FString& Guess) const -> FBullCowCount
 	}
 	return Count;
 }
-

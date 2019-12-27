@@ -7,11 +7,11 @@
 #include "BullCowGameGameModeBase.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
-class BULLCOWGAME_API ABullCowGameGameModeBase : public AGameModeBase
+class BULLCOWGAME_API ABullCowGameGameModeBase final : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+
 };
